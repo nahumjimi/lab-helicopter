@@ -42,6 +42,7 @@ class Game {
   
   move() {
     this.background.move();
+    this.helicopter.move()
   }
 
   checkCollisions() {
