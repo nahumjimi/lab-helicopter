@@ -3,6 +3,7 @@ class Game {
     this.ctx = ctx;
     this.intervalId = null;
     this.background = new Background(this.ctx);
+    this.helicopter = new Helicopter(this.ctx);
 
 
   }
@@ -35,7 +36,7 @@ class Game {
 
   draw() {
     this.background.draw();
-    
+    this.helicopter.draw();
 
   }
   
