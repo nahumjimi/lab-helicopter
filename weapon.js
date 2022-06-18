@@ -2,8 +2,7 @@ class Weapon {
   constructor(shooter) {
     this.bullets = [];
     this.ctx = shooter.ctx
-    this.x = shooter.x + shooter.w;
-    this.y = shooter.y + shooter.h;
+    this.shooter = shooter;
 
     this.tickBullet = 0;
     this.isReloading = false;
@@ -16,7 +15,7 @@ class Weapon {
     if (this.tickBullet > 2) {
       this.tickBullet = 0;
       if(!this.isReloading) {
-        this.bullets.push(new Bullet(this.ctx ,this.x, this.y));
+        this.bullets.push(new Bullet(this.ctx ,this.shooter.x + this.shooter.w, this.shooter.y + this.shooter.h));
         this.bulletsCounter++;
       }
     }

@@ -49,7 +49,6 @@ class Helicopter {
 
     animate() {
         this.tick++
-
         if (this.tick > 4) {
             this.tick = 0
             this.img.frameIndex++
