@@ -1,20 +1,23 @@
 class Bullet {
     constructor(ctx, x, y) {
-        this.ctx = ctx
-        this.x = x
-        this.y = y
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.vx = 8;
     }
 
     draw() {
-        context.beginPath()
-        context.arc(this.x, this.y, radius, 0, Math.PI, false)
-        context.fillStyle = 'green'
-        context.fill()
+        this.ctx.beginPath()
+        this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2, false)
+        this.ctx.stroke()
+        this.ctx.closePath()
     }
 
     move() {
         this.x += this.vx
     }
 
-    isVisible() {}
+    isVisible() {
+        return this.x < this.ctx.canvas.width
+    }
 }

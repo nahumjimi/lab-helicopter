@@ -17,6 +17,7 @@ class Helicopter {
             a: false,
             s: false,
             d: false,
+            h: false
         }
         this.setListeners()
         this.weapon = new Weapon(this)
@@ -35,12 +36,15 @@ class Helicopter {
             this.h
         )
         this.animate()
+        this.weapon.draw();
+
     }
 
     isFloor() {}
 
     move() {
-        this.applyActions()
+        this.applyActions();
+        this.weapon.move();
     }
 
     animate() {
@@ -73,9 +77,14 @@ class Helicopter {
         } else if (this.actions.d) {
             this.x += 5
         }
+
+        if (this.actions.h) {
+             this.weapon.shoot();
+        }
     }
 
     switchAction(key, apply) {
         this.actions[key] = apply
+        console.log(key)
     }
 }

@@ -5,7 +5,6 @@ class Game {
     this.background = new Background(this.ctx);
     this.helicopter = new Helicopter(this.ctx);
 
-
   }
 
   start() {
@@ -13,8 +12,6 @@ class Game {
       this.clear();
       this.draw();
       this.move();
-      
-
     }    
     , 1000/60)
     }
@@ -32,17 +29,19 @@ class Game {
       this.ctx.canvas.width,
       this.ctx.canvas.heigth
     )
+   
   }
 
   draw() {
     this.background.draw();
     this.helicopter.draw();
-
+    
   }
   
   move() {
     this.background.move();
-    this.helicopter.move()
+    this.helicopter.move();
+
   }
 
   checkCollisions() {
