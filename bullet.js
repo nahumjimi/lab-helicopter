@@ -4,6 +4,8 @@ class Bullet {
         this.x = x;
         this.y = y;
         this.vx = 8;
+        this.w = 1;
+        this.h = 1;
     }
 
     draw() {

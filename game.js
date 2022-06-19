@@ -4,6 +4,7 @@ class Game {
     this.intervalId = null;
     this.background = new Background(this.ctx);
     this.helicopter = new Helicopter(this.ctx);
+    this.obstacleUp = false
     this.obstacles = [];
     this.tickObstacle = 0;
   }
@@ -11,6 +12,7 @@ class Game {
   start() {
     this.intervalId = setInterval( () => {
       this.clear();
+      this.clearObstacles(); 
       this.draw();
       this.checkCollisions();
       this.move();
@@ -24,11 +26,12 @@ class Game {
     }
 
   clearObstacles() {
-
+    this.obstacles = this.obstacles.filter(obs=>obs.isVisible())
   }
 
   addObstacle() {
-    this.obstacles.push(new Obstacle(this.ctx))
+    this.obstacles.push(new Obstacle(this.ctx, this.obstacleUp))
+    this.obstacleUp = !this.obstacleUp
   }
 
   clear() {
@@ -53,14 +56,25 @@ class Game {
   }
 
   checkCollisions() {
-    this.obstacles.forEach((obs)=>{
-      this.helicopter.weapon.bullets.forEach(bullet=>{
-        obs.collide(bullet)
-        console.log(obs.collide(bullet))
-      })
+    this.obstacles.forEach((obs, obsIndex)=>{
+      if(obs.collide(this.helicopter)){
+        this.gameOver()
+      }
+     this.helicopter.weapon.bullets.forEach((bull, bullIndex)=>{
+          if(obs.collide(bull)){
+            this.obstacles.splice(obsIndex,1)
+            this.helicopter.weapon.bullets.splice(bullIndex,1)
+        }
+     })   
     })
   }
 
   gameOver() {
+    clearInterval(this.intervalId);
+        this.intervalId = null
+        this.ctx.font = "30px Arial";
+        this.ctx.fillStyle = "blue";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText("GAME OVER", this.ctx.canvas.width/2, this.ctx.canvas.height/2);
   }
 }
