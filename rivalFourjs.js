@@ -1,0 +1,3 @@
+class RivalFour{
+    constructor(ctx)
+}
